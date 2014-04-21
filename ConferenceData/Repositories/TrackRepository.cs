@@ -38,7 +38,7 @@ namespace ConferenceData.Repositories
 
         public IEnumerable<Track> GetAll(int conferenceId)
         {
-            var tracks = new List<Track>();
+            List<Track> tracks = null; 
 
             using (var db = new ConferenceDbContext())
             {

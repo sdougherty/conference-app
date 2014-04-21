@@ -53,5 +53,15 @@ namespace ConferenceService.Controllers
             repo.Delete(conferenceId);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        [HttpGet]
+        [Route("conference/{conferenceId}/speakers")]
+        public HttpResponseMessage GetSpeakers(int conferenceId)
+        {
+            var speakerRepo = new SessionSpeakerRepository();
+            var speakers = speakerRepo.GetSpeakerRoster(conferenceId);
+
+            return Request.CreateResponse(HttpStatusCode.OK, speakers);
+        }
     }
 }

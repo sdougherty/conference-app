@@ -13,7 +13,7 @@ namespace ConferenceService
             // Web API configuration and services
 
             // Enable cross orgin requests
-            var cors = new EnableCorsAttribute("http://glic-dev-conf.azurewebsites.net,http://localhost", "*", "*");
+            var cors = new EnableCorsAttribute("*", "*", "GET,POST,PUT,DELETE");
             config.EnableCors(cors);
 
             // Web API routes

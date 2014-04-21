@@ -22,6 +22,18 @@ namespace ConferenceData.Repositories
             return user;
         }
 
+        public User Get(string emailAddress)
+        {
+            User user = null;
+
+            using (var db = new ConferenceDbContext())
+            {
+                user = db.Users.Where(u => u.EmailAddress == emailAddress).FirstOrDefault();
+            }
+
+            return user;
+        }
+
         public IEnumerable<User> GetAll()
         {
             var users = new List<User>();

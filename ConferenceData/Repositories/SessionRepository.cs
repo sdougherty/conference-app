@@ -75,8 +75,26 @@ namespace ConferenceData.Repositories
         {
             using (var db = new ConferenceDbContext())
             {
-                db.Sessions.Attach(session);
-                db.Entry(session).State = EntityState.Modified;
+                int? formatId = null;
+
+                if (session.Format != null)
+                {
+                    formatId = session.Format.Id;
+                }
+
+                var original = db.Sessions.Find(session.Id);
+
+                db.Entry(original).CurrentValues.SetValues(session);
+
+                if (formatId.HasValue)
+                {
+                    original.Format = db.SessionFormats.Find(formatId.Value);
+                }
+                else
+                {
+                    original.Format = null;
+                }
+
                 db.SaveChanges();
             }
 

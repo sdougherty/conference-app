@@ -18,8 +18,16 @@ namespace ConferenceService.Controllers
         [Route("track")]
         public HttpResponseMessage GetAll(int conferenceId)
         {
-            var tracks = repo.GetAll();
-            return Request.CreateResponse(HttpStatusCode.OK, tracks);
+            var tracks = repo.GetAll(conferenceId);
+
+            if (tracks == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, conferenceId);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, tracks);
+            }
         }
 
         [HttpGet]
@@ -27,7 +35,15 @@ namespace ConferenceService.Controllers
         public HttpResponseMessage Get(int conferenceId, int trackId)
         {
             var track = repo.Get(trackId);
-            return Request.CreateResponse(HttpStatusCode.OK, track);
+
+            if (track == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, trackId);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, track);
+            }
         }
 
         [HttpPost]
@@ -50,8 +66,16 @@ namespace ConferenceService.Controllers
         [Route("track/{trackId}")]
         public HttpResponseMessage Delete(int conferenceId, int trackId)
         {
-            repo.Delete(trackId);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var result = repo.Delete(trackId);
+
+            if (result > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, trackId);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, trackId);
+            }
         }
     }
 }

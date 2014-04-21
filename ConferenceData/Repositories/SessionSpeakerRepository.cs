@@ -46,8 +46,25 @@ namespace ConferenceData.Repositories
             using (var db = new ConferenceDbContext())
             {
                 speakers = db.SessionSpeakers
-                    .Where(s => s.Id == conferenceId)
+                    .Where(s => s.Session.Conference.Id == conferenceId)
                     .Include(s => s.User)
+                    .ToList();
+            }
+
+            return speakers;
+        }
+
+        public IEnumerable<User> GetSpeakerRoster(int conferenceId)
+        {
+            List<User> speakers = null;
+
+            using (var db = new ConferenceDbContext())
+            {
+                speakers = db.SessionSpeakers
+                    .Where(s => s.Session.Conference.Id == conferenceId)
+                    .Include(s => s.User)
+                    .Select(s => s.User)
+                    .Distinct()
                     .ToList();
             }
 

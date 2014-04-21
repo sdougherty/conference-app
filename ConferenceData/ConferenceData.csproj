@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201404161442466_InitialSetup.Designer.cs">
       <DependentUpon>201404161442466_InitialSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404210422234_AddAttendingDays.cs" />
+    <Compile Include="Migrations\201404210422234_AddAttendingDays.Designer.cs">
+      <DependentUpon>201404210422234_AddAttendingDays.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConferenceRepository.cs" />
@@ -84,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201404161442466_InitialSetup.resx">
       <DependentUpon>201404161442466_InitialSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404210422234_AddAttendingDays.resx">
+      <DependentUpon>201404210422234_AddAttendingDays.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

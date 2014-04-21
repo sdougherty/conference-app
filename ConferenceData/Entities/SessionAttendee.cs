@@ -15,5 +15,9 @@ namespace ConferenceData.Entities
         [JsonIgnore]
         public virtual Session Session { get; set; }
         public DateTime? RegistrationTime { get; set; }
+
+        public bool AttendingFirstDay { get; set; }
+        public bool AttendingSecondDay { get; set; }
+        public bool AttendingBothDays { get; set; }
     }
 }

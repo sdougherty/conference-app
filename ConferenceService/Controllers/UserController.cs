@@ -23,11 +23,35 @@ namespace ConferenceService.Controllers
         }
 
         [HttpGet]
+        [Route("user")]
+        public HttpResponseMessage Get(string emailAddress)
+        {
+            var user = repo.Get(emailAddress);
+
+            if (user == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, String.Format("User: {0} not found ", emailAddress));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, user);
+            }
+        }
+
+        [HttpGet]
         [Route("user/{userId}")]
         public HttpResponseMessage Get(int userId)
         {
             var user = repo.Get(userId);
-            return Request.CreateResponse(HttpStatusCode.OK, user);
+
+            if (user == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, String.Format("User: {0} not found ", userId.ToString()));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, user);
+            }
         }
 
         [HttpPost]
@@ -50,8 +74,16 @@ namespace ConferenceService.Controllers
         [Route("user/{userId}")]
         public HttpResponseMessage Delete(int userId)
         {
-            repo.Delete(userId);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var result = repo.Delete(userId);
+
+            if (result > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, userId);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, String.Format("User: {0} not found ", userId.ToString()));
+            }
         }
     }
 }
