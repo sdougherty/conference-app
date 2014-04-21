@@ -16,6 +16,7 @@ namespace ConferenceData.Entities
         public string Room { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? FinishTime { get; set; }
+        public string Leaders { get; set; }
         public virtual ICollection<Track> Tracks { get; set; }
         public virtual ICollection<SessionSpeaker> Speakers { get; set; }
         public virtual ICollection<SessionAttendee> Attendees { get; set; }

@@ -52,7 +52,7 @@ namespace ConferenceData.Repositories
         {
             if (UserExists(user))
             {
-                throw new ArgumentException(String.Format("The specified user: '{0}' already exists in the system.", user.EmailAddress));
+                throw new ArgumentException(String.Format("The specified user: '{0}' is already registered.", user.EmailAddress));
             }
 
             using (var db = new ConferenceDbContext())

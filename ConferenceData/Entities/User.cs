@@ -19,6 +19,9 @@ namespace ConferenceData.Entities
         public string Interests { get; set; }
         public string Bio { get; set; }
         public bool EmailConfirmed { get; set; }
+        public bool AttendingFirstDay { get; set; }
+        public bool AttendingSecondDay { get; set; }
+        public bool AttendingBothDays { get; set; }
 
         [JsonIgnore]
         public DateTime? CreationTime { get; set; }

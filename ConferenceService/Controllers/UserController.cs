@@ -67,6 +67,7 @@ namespace ConferenceService.Controllers
         public HttpResponseMessage Put(User user)
         {
             user = repo.Create(user);
+            Services.RegistrationService.SendNotification(user);
             return Request.CreateResponse(HttpStatusCode.OK, user);
         }
 

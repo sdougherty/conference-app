@@ -19,6 +19,7 @@ namespace ConferenceData.Repositories
                 session = db.Sessions
                     .Where(s => s.Id == sessionId)
                     .Include(s => s.Format)
+                    .Include(s => s.Speakers.Select(u => u.User))
                     .Include(s => s.Tracks)
                     .OrderBy(s => s.StartTime)
                     .FirstOrDefault(); 
@@ -35,6 +36,7 @@ namespace ConferenceData.Repositories
             {
                 sessions = db.Sessions
                     .Include(s => s.Format)
+                    .Include(s => s.Speakers.Select(u => u.User))
                     .Include(s => s.Tracks)
                     .OrderBy(s => s.StartTime)
                     .ToList(); 
@@ -52,6 +54,7 @@ namespace ConferenceData.Repositories
                 sessions = db.Sessions
                     .Where(s => s.Conference.Id == conferenceId)
                     .Include(s => s.Format)
+                    .Include(s => s.Speakers.Select(u => u.User))
                     .Include(s => s.Tracks)
                     .OrderBy(s => s.StartTime)
                     .ToList();
